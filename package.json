@@ -1,0 +1,17 @@
+{
+  "name": "chattr",
+  "version": "1.0.0",
+  "description": "Chat with Yesod and Elm",
+  "repository": "https://github.com/jsteiner/chattr.git",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "author": "Josh Steiner",
+  "license": "MIT",
+  "dependencies": {
+    "elm-webpack-loader": "^2.0.0",
+    "webpack": "^1.12.13"
+  }
+}
