@@ -1,1 +1,12 @@
-var main = Elm.fullscreen(Elm.Main);
+var main = Elm.fullscreen(Elm.Main, {newMessage: ""});
+
+var url = document.URL.replace("http:", "ws:").replace("https:", "wss:");
+conn = new WebSocket(url);
+
+conn.onmessage = function(e) {
+  main.ports.newMessage.send(e.data);
+};
+
+main.ports.sendMessage.subscribe(function(message) {
+  conn.send(message);
+});
