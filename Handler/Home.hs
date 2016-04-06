@@ -5,15 +5,14 @@ import Yesod.WebSockets
 
 getHomeR :: Handler Html
 getHomeR = do
-    webSockets chatApp
+    webSockets chatStream
     defaultLayout $ do
         setTitle "Welcome To Chattr!"
         $(widgetFile "home")
 
-chatApp :: WebSocketsT Handler ()
-chatApp = do
-    app <- getYesod
-    let writeChannel = appBroadcastChannel app
+chatStream :: WebSocketsT Handler ()
+chatStream = do
+    App { appBroadcastChannel = writeChannel } <- getYesod
     readChannel <- atomically $ dupTChan writeChannel
     race_
         (forever $ atomically (readTChan readChannel) >>= sendTextData)
